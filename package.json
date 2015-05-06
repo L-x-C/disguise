@@ -19,6 +19,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "cheerio": "^0.19.0",
+    "officegen": "^0.2.9",
     "textract": "^0.19.0"
   }
 }
