@@ -3,16 +3,14 @@ var fs = require('fs');
 var officegen = require('officegen');
 
 var dic;
-fs.readFile('dic2.json', 'utf-8', function(err, data) {
+fs.readFile('dic.json', 'utf-8', function(err, data) {
 	dic = JSON.parse(data);
 });
 
-textract('a.docx', 'utf-8',function(error, text) {
-	console.log(text)
+textract('a.doc', function(error, text) {
 	for (var i in dic) {
 		var reg = new RegExp(i, 'g');
 		var replaceVal = dic[i][Math.floor(Math.random() * (dic[i].length - 1))];
-		console.log(text);
 		text = text.replace(reg, replaceVal);
 	}
 	var docx = officegen('docx');
@@ -25,7 +23,7 @@ textract('a.docx', 'utf-8',function(error, text) {
 	var pObj = docx.createP();
 	pObj.addText(text);
 
-	var out = fs.createWriteStream('b.doc');
+	var out = fs.createWriteStream('b.docx');
 
 	out.on('error', function(err) {
 		console.log(err);
